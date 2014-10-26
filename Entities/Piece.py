@@ -1,0 +1,169 @@
+__author__ = 'Cheaterman'
+
+from Layouts.SparseGridLayout import SparseGridLayout
+from kivy.clock import Clock
+from kivy.core.window import Window
+from kivy.graphics import Color, Rectangle, InstructionGroup
+from kivy.properties import ListProperty
+from Entities.Block import Block
+from Interfaces.TetrisAware import TetrisAware
+from math import ceil, floor
+
+
+class Piece(SparseGridLayout, TetrisAware):
+    map = ListProperty([])
+
+    def __init__(self, **kwargs):
+        self.color = (1, 1, 1, 1)
+        if 'color' in kwargs:
+            self.color = kwargs['color']
+
+        self.vertical = False
+
+        super(SparseGridLayout, self).__init__(**kwargs)
+
+        self.bind(map=self.on_map)
+
+        self.keyboard = Window.request_keyboard(self.keyboard_closed, self, 'text')
+        self.keyboard.bind(on_key_down=self.on_keypress)
+
+    def on_map(self, instance, value):
+        if len(self.children) < sum(line.count('x') for line in self.map):
+            Clock.schedule_interval(self.update, .5)
+
+        current_child = 0
+        for y in range(len(self.map)):
+            for x in range(len(self.map[y])):
+                if self.map[y][x] == 'x':
+                    if len(self.children) < sum(line.count('x') for line in self.map):
+                        self.add_widget(Block(coords=(x, y), color=self.color))
+                    else:
+                        self.children[current_child].coords = (x, y)
+                        current_child += 1
+        self.do_layout()
+
+    def update(self, *args):
+        if not self.parent:
+            Clock.unschedule(self.update)
+            return
+
+        if self.tetris_coords[1] == 0 or self.collide_piece('down'):
+            self.do_layout()
+            for child in self.children[:]:
+                child.pos_hint = {}
+                self.remove_widget(child)
+                self.parent.add_widget(child)
+            self.parent.parent.spawn.new_piece()
+            self.parent.remove_widget(self)
+            self.keyboard_closed()
+        else:
+            self.tetris_coords[1] = self.tetris_coords[1] - 1
+
+    def collide_piece(self, direction='down'):
+        if self.parent:
+            for child in self.parent.children:
+                if hasattr(child, 'tetris_coords') and child != self:
+                    for own_child in self.children:
+                        if direction == 'down':
+                            if own_child.tetris_coords[1] - 1 == child.tetris_coords[1]\
+                               and own_child.tetris_coords[0] == child.tetris_coords[0]:
+                                return True
+                        if direction == 'left':
+                            if own_child.tetris_coords[0] - 1 == child.tetris_coords[0]\
+                               and own_child.tetris_coords[1] == child.tetris_coords[1]:
+                                return True
+                        if direction == 'right':
+                            if own_child.tetris_coords[0] + 1 == child.tetris_coords[0]\
+                               and own_child.tetris_coords[1] == child.tetris_coords[1]:
+                                return True
+        return False
+
+    def on_tetris_coords(self, *args):
+        if hasattr(self, 'map') and self.parent:
+            if self.tetris_coords[0] < 0:
+                self.tetris_coords[0] = 0
+            if self.tetris_coords[0] + len(self.map[0]) > self.parent.cols:
+                self.tetris_coords[0] = self.parent.cols - len(self.map[0])
+            if self.tetris_coords[1] < 0:
+                self.tetris_coords[1] = 0
+            if self.tetris_coords[1] + len(self.map) > self.parent.rows:
+                self.tetris_coords[1] = self.parent.rows - len(self.map)
+
+        if hasattr(self.parent, 'coord_to_pos'):
+            self.pos = self.parent.coord_to_pos(*self.tetris_coords)
+
+        for child in self.children:
+            child.tetris_coords = [self.tetris_coords[0] + child.col, self.tetris_coords[1] + child.row]
+
+    def do_layout(self, *args):
+        super(Piece, self).do_layout(*args)
+
+        if hasattr(self, 'outline'):
+            self.canvas.before.remove(self.outline)
+
+        self.outline = InstructionGroup()
+        for child in self.children:
+            self.outline.add(Color(.8, .8, .8, .8))
+            self.outline.add(Rectangle(
+                    size=(child.width + 4, child.height + 4),
+                    pos=(child.x - 2, child.y - 2)
+            ))
+
+        if self.canvas.before:
+            self.canvas.before.add(self.outline)
+
+            if len(self.children) == 0:
+                if hasattr(self, 'outline'):
+                    self.canvas.before.remove(self.outline)
+
+    def rotate(self, **kwargs):
+        direction = 'ccw'
+        if 'direction' in kwargs:
+            direction = kwargs['direction']
+
+        if direction == 'ccw':
+            new_map = zip(*self.map[::-1])
+        else:
+            for i in range(3):
+                self.rotate(direction='ccw')
+            return
+
+        map_diff = [
+            len(self.map[0]) - len(new_map[0]),
+            len(self.map) - len(new_map)
+        ]
+
+        for i in range(len(map_diff)):
+            if self.vertical:
+                map_diff[i] = floor(map_diff[i] / 2.)
+            else:
+                map_diff[i] = ceil(map_diff[i] / 2.)
+        self.vertical = not self.vertical
+
+        self.map = new_map
+
+        self.tetris_coords[0] += map_diff[0]
+        self.tetris_coords[1] += map_diff[1]
+
+    def on_keypress(self, keyboard, keycode, text, modifiers):
+        if keycode[1] == 'q':
+            self.rotate(direction='cw')
+        elif keycode[1] == 'e':
+            self.rotate(direction='ccw')
+        elif keycode[1] == 'a':
+            if not self.collide_piece('left'):
+                self.tetris_coords[0] -= 1
+        elif keycode[1] == 'd':
+            if not self.collide_piece('right'):
+                self.tetris_coords[0] += 1
+        elif keycode[1] == 's':
+            if not self.collide_piece('down'):
+                self.tetris_coords[1] -= 1
+            self.update()
+        else:
+            return True
+
+    def keyboard_closed(self):
+        if self.keyboard:
+            self.keyboard.unbind(on_key_down=self.on_keypress)
+            self.keyboard = None

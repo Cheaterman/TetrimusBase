@@ -1,0 +1,37 @@
+MenuScreen:
+    name: 'menu'
+
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        cols: 1
+        row_default_height: 50
+        row_force_default: True
+        spacing: 25
+        size_hint: 0.3, None
+        pos: root.center_x + root.width * 0.4 - self.width, root.center_y + self.height / 2
+
+        OSButton:
+            text: 'Classic mode'
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'classic'
+
+        OSButton:
+            text: 'Puzzle mode'
+
+        OSButton:
+            text: 'Multiplayer'
+
+        OSButton
+            text: 'Options'
+
+        OSButton:
+            text: 'Quit game'
+            on_release:
+                app.stop()

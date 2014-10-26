@@ -1,0 +1,48 @@
+ClassicGameScreen:
+    name: 'classic'
+    gamearea: TetrisArea
+    spawn: PieceSpawner
+
+    OSButton:
+        text: 'Start game'
+        on_release: root.spawn.new_piece()
+
+        size_hint: 0.25, 0.1
+        pos: root.width * 3 / 4 - self.width / 2, root.height * 3 / 4 - self.height / 2
+
+    OSButton:
+        text: 'Back to menu'
+        on_release:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'menu'
+
+        size_hint: 0.25, 0.1
+        pos: root.width * 3 / 4 - self.width / 2, root.height * 1 / 4 - self.height / 2
+
+    TetrisArea:
+        id: TetrisArea
+        grid: TetrisGrid
+
+        size_hint: .4 * root.height / root.width, .8
+        pos: root.width / 4 - self.width / 2, root.center_y - self.height / 2
+        shape: (10, 20)
+
+        canvas:
+            Color:
+                rgba: .5, 0, .5, 1
+
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        TetrisGrid:
+            id: TetrisGrid
+            pos: self.parent.pos
+            size: self.parent.size
+            shape: self.parent.shape
+
+    PieceSpawner:
+        id: PieceSpawner
+
+<Block>:
+    source: 'resources/images/piece_block.png'
