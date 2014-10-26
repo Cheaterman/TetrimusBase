@@ -59,23 +59,32 @@ class Piece(SparseGridLayout, TetrisAware):
         else:
             self.tetris_coords[1] = self.tetris_coords[1] - 1
 
-    def collide_piece(self, direction='down'):
+    def collide_piece(self, direction='down', map=[], coords=[]):
         if self.parent:
             for child in self.parent.children:
                 if hasattr(child, 'tetris_coords') and child != self:
-                    for own_child in self.children:
-                        if direction == 'down':
-                            if own_child.tetris_coords[1] - 1 == child.tetris_coords[1]\
-                               and own_child.tetris_coords[0] == child.tetris_coords[0]:
-                                return True
-                        if direction == 'left':
-                            if own_child.tetris_coords[0] - 1 == child.tetris_coords[0]\
-                               and own_child.tetris_coords[1] == child.tetris_coords[1]:
-                                return True
-                        if direction == 'right':
-                            if own_child.tetris_coords[0] + 1 == child.tetris_coords[0]\
-                               and own_child.tetris_coords[1] == child.tetris_coords[1]:
-                                return True
+                    if direction == 'cw' or direction == 'ccw':
+                        for y in range(len(map)):
+                            for x in range(len(map[y])):
+                                if map[y][x] == 'x':
+                                    if coords[0] + x == child.tetris_coords[0]\
+                                       and coords[1] + y == child.tetris_coords[1]:
+                                            return True
+                    else:
+                        for own_child in self.children:
+                            if direction == 'down':
+                                if own_child.tetris_coords[1] - 1 == child.tetris_coords[1]\
+                                   and own_child.tetris_coords[0] == child.tetris_coords[0]:
+                                    return True
+                            if direction == 'left':
+                                if own_child.tetris_coords[0] - 1 == child.tetris_coords[0]\
+                                   and own_child.tetris_coords[1] == child.tetris_coords[1]:
+                                    return True
+                            if direction == 'right':
+                                if own_child.tetris_coords[0] + 1 == child.tetris_coords[0]\
+                                   and own_child.tetris_coords[1] == child.tetris_coords[1]:
+                                    return True
+
         return False
 
     def on_tetris_coords(self, *args):
@@ -103,7 +112,7 @@ class Piece(SparseGridLayout, TetrisAware):
 
         self.outline = InstructionGroup()
         for child in self.children:
-            self.outline.add(Color(.8, .8, .8, .8))
+            self.outline.add(Color(.5, .8, 1, .8))
             self.outline.add(Rectangle(
                     size=(child.width + 4, child.height + 4),
                     pos=(child.x - 2, child.y - 2)
@@ -121,13 +130,27 @@ class Piece(SparseGridLayout, TetrisAware):
         if 'direction' in kwargs:
             direction = kwargs['direction']
 
-        if direction == 'ccw':
-            new_map = zip(*self.map[::-1])
-        else:
-            for i in range(3):
-                self.rotate(direction='ccw')
+        new_map = self.rotate_map(direction)
+        new_coords = self.rotate_coords(new_map)
+
+        if self.collide_piece(direction, new_map, new_coords):
             return
 
+        self.vertical = not self.vertical
+
+        self.map = new_map
+
+        self.tetris_coords = new_coords
+
+    def rotate_map(self, direction):
+        new_map = zip(*self.map[::-1])
+        if direction == 'cw':
+            for i in range(2):
+                new_map = zip(*new_map[::-1])
+
+        return new_map
+
+    def rotate_coords(self, new_map):
         map_diff = [
             len(self.map[0]) - len(new_map[0]),
             len(self.map) - len(new_map)
@@ -138,18 +161,14 @@ class Piece(SparseGridLayout, TetrisAware):
                 map_diff[i] = floor(map_diff[i] / 2.)
             else:
                 map_diff[i] = ceil(map_diff[i] / 2.)
-        self.vertical = not self.vertical
 
-        self.map = new_map
-
-        self.tetris_coords[0] += map_diff[0]
-        self.tetris_coords[1] += map_diff[1]
+        return self.tetris_coords[0] + map_diff[0], self.tetris_coords[1] + map_diff[1]
 
     def on_keypress(self, keyboard, keycode, text, modifiers):
         if keycode[1] == 'q':
-            self.rotate(direction='cw')
-        elif keycode[1] == 'e':
             self.rotate(direction='ccw')
+        elif keycode[1] == 'e':
+            self.rotate(direction='cw')
         elif keycode[1] == 'a':
             if not self.collide_piece('left'):
                 self.tetris_coords[0] -= 1

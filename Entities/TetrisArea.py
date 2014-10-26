@@ -11,6 +11,6 @@ class TetrisArea(FloatLayout, GridAware):
     grid = ObjectProperty(None)
 
     def on_children(self, *args):
-        for y in self.rows:
-            for x in self.cols:
-                
+        for y in range(self.rows):
+            for x in range(self.cols):
+                pass
