@@ -196,6 +196,8 @@ class Piece(SparseGridLayout, TetrisAware):
         elif keycode[1] == 'right':
             if not self.collide_piece('right'):
                 self.tetris_coords[0] += 1
+        elif keycode[1] == 'up':
+            self.rotate(direction='ccw')
         elif keycode[1] == 'down':
             if not self.collide_piece('down'):
                 self.tetris_coords[1] -= 1
