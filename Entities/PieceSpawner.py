@@ -1,12 +1,12 @@
 __author__ = 'Cheaterman'
 
-from Entities.Piece import Piece
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.graphics import Color
 from kivy.properties import NumericProperty
 from collections import deque
 import random
+from Entities.Piece import Piece, ErrorPiece
 
 
 
@@ -52,6 +52,7 @@ class PieceSpawner(Widget):
 
         self.next_pieces = deque([])
         self.next_colors = deque([])
+
         self.bind(preview=self.on_preview)
         self.on_preview(self, self.preview)
 
@@ -73,11 +74,14 @@ class PieceSpawner(Widget):
         color = self.colors[current_color]
         tetris_coords = (area.cols / 2 - len(map[0]) / 2, area.rows - len(map))
 
-        piece = Piece(
-            pos = area.coord_to_pos(*tetris_coords),
-            size_hint = (None, None),
-            color = (color.r, color.g, color.b, color.a)
-        )
+        if not self.check_spawn(tetris_coords, map):
+            piece = Piece()
+        else:
+            piece = ErrorPiece()
+
+        piece.pos = area.coord_to_pos(*tetris_coords)
+        piece.size_hint = (None, None)
+        piece.color = (color.r, color.g, color.b, color.a)
 
         piece.height = len(map) * area.tile_size()[1]
         piece.width = len(map[0]) * area.tile_size()[0]
@@ -87,3 +91,19 @@ class PieceSpawner(Widget):
 
         area.add_widget(piece)
         piece.tetris_coords = tetris_coords
+
+        if type(piece) == ErrorPiece:
+            self.parent.game_lost()
+
+    def check_spawn(self, tetris_coords, map):
+        area = self.parent.gamearea
+        piece = Piece()
+
+        area.add_widget(piece)
+        piece.map = map
+        piece.tetris_coords = tetris_coords
+
+        collides = piece.collide_piece('current')
+        area.remove_widget(piece)
+
+        return collides

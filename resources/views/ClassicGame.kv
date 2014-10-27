@@ -4,13 +4,6 @@ ClassicGameScreen:
     spawn: PieceSpawner
 
     OSButton:
-        text: 'Start game'
-        on_release: root.spawn.new_piece()
-
-        size_hint: 0.25, 0.1
-        pos: root.width * 3 / 4 - self.width / 2, root.height * 3 / 4 - self.height / 2
-
-    OSButton:
         text: 'Back to menu'
         on_release:
             root.manager.transition.direction = 'right'

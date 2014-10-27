@@ -26,11 +26,9 @@ class Piece(SparseGridLayout, TetrisAware):
 
         self.keyboard = Window.request_keyboard(self.keyboard_closed, self, 'text')
         self.keyboard.bind(on_key_down=self.on_keypress)
+        Clock.schedule_interval(self.update, .5)
 
     def on_map(self, instance, value):
-        if len(self.children) < sum(line.count('x') for line in self.map):
-            Clock.schedule_interval(self.update, .5)
-
         current_child = 0
         for y in range(len(self.map)):
             for x in range(len(self.map[y])):
@@ -49,15 +47,20 @@ class Piece(SparseGridLayout, TetrisAware):
 
         if self.tetris_coords[1] == 0 or self.collide_piece('down'):
             self.do_layout()
-            for child in self.children[:]:
-                child.pos_hint = {}
-                self.remove_widget(child)
-                self.parent.add_widget(child)
+            self.remove_children()
+            self.parent.check_line()
             self.parent.parent.spawn.new_piece()
-            self.parent.remove_widget(self)
+            if self.parent:
+                self.parent.remove_widget(self)
             self.keyboard_closed()
         else:
             self.tetris_coords[1] = self.tetris_coords[1] - 1
+
+    def remove_children(self):
+        for child in self.children[:]:
+            child.pos_hint = {}
+            self.remove_widget(child)
+            self.parent.add_widget(child)
 
     def collide_piece(self, direction='down', map=[], coords=[]):
         if self.parent:
@@ -82,6 +85,10 @@ class Piece(SparseGridLayout, TetrisAware):
                                     return True
                             if direction == 'right':
                                 if own_child.tetris_coords[0] + 1 == child.tetris_coords[0]\
+                                   and own_child.tetris_coords[1] == child.tetris_coords[1]:
+                                    return True
+                            if direction == 'current':
+                                if own_child.tetris_coords[0] == child.tetris_coords[0]\
                                    and own_child.tetris_coords[1] == child.tetris_coords[1]:
                                     return True
 
@@ -182,7 +189,44 @@ class Piece(SparseGridLayout, TetrisAware):
         else:
             return True
 
+        return False
+
     def keyboard_closed(self):
         if self.keyboard:
             self.keyboard.unbind(on_key_down=self.on_keypress)
             self.keyboard = None
+
+class ErrorPiece(Piece):
+    def __init__(self, **kwargs):
+        super(ErrorPiece, self).__init__(**kwargs)
+
+        self.highlight = False
+
+    def on_keypress(self, keyboard, keycode, text, modifiers):
+        return True
+
+    def do_layout(self, *args):
+        super(ErrorPiece, self).do_layout(*args)
+        self.update()
+
+    def update(self, *args):
+        if hasattr(self, 'outline'):
+            self.canvas.before.remove(self.outline)
+
+        self.outline = InstructionGroup()
+        if self.highlight:
+            for child in self.children[:]:
+                self.outline.add(Color(1, .2, .2, .8))
+                self.outline.add(Rectangle(
+                        size=(child.width + 4, child.height + 4),
+                        pos=(child.x - 2, child.y - 2)
+                ))
+
+            if self.canvas.before:
+                self.canvas.before.add(self.outline)
+
+            self.highlight = False
+        else:
+            self.canvas.before.remove(self.outline)
+
+            self.highlight = True
