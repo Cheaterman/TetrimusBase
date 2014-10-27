@@ -1,10 +1,12 @@
+
 __author__ = 'Cheaterman'
 
 from kivy.uix.floatlayout import FloatLayout
+from kivy.animation import Animation
+from kivy.properties import ObjectProperty
+from Interfaces.GridAware import GridAware
 from Entities.TetrisGrid import TetrisGrid
 from Entities.Block import Block
-from Interfaces.GridAware import GridAware
-from kivy.properties import ObjectProperty
 
 
 
@@ -23,8 +25,6 @@ class TetrisArea(FloatLayout, GridAware):
                 self.check_line()
                 return
 
-        self.checking_line = False
-
     def remove_line(self, line):
         for child in self.children[:]:
             if type(child) == Block:
@@ -32,4 +32,9 @@ class TetrisArea(FloatLayout, GridAware):
                     self.remove_widget(child)
                 if child.tetris_coords[1] > line:
                     child.tetris_coords[1] -= 1
-                    child.pos = self.coord_to_pos(*child.tetris_coords)
+                    Animation.cancel_all(child, 'pos')
+                    Animation(
+                        pos=self.coord_to_pos(*child.tetris_coords),
+                        duration=.25,
+                        t='in_expo'
+                    ).start(child)

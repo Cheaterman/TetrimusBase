@@ -37,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/Screens/ClassicGameScreen.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="125" max-vertical-offset="714">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding>
                 <element signature="e#27#56#0" expanded="true" />
               </folding>
@@ -49,16 +49,16 @@
         <entry file="file://$PROJECT_DIR$/Tetrimus.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Piece.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Piece.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Entities/Piece.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9134126" vertical-offset="1026" max-vertical-offset="4029">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3440" max-vertical-offset="4029">
               <caret line="92" column="47" selection-start-line="92" selection-start-column="47" selection-end-line="92" selection-end-column="47" />
               <folding>
                 <element signature="e#27#80#0" expanded="true" />
@@ -82,7 +82,7 @@
       <file leaf-file-name="PieceSpawner.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Entities/PieceSpawner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1298" max-vertical-offset="1955">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1366" max-vertical-offset="1955">
               <caret line="105" column="47" selection-start-line="105" selection-start-column="47" selection-end-line="105" selection-end-column="47" />
               <folding>
                 <element signature="e#27#51#0" expanded="true" />
@@ -103,13 +103,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TetrisArea.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="TetrisArea.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Entities/TetrisArea.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="91" max-vertical-offset="680">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.8556876" vertical-offset="159" max-vertical-offset="765">
+              <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
               <folding>
-                <element signature="e#27#71#0" expanded="true" />
+                <element signature="e#28#72#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -166,12 +166,12 @@
         <option value="$PROJECT_DIR$/Interfaces/GridAware.py" />
         <option value="$PROJECT_DIR$/Interfaces/TetrisAware.py" />
         <option value="$PROJECT_DIR$/Entities/Block.py" />
-        <option value="$PROJECT_DIR$/Entities/TetrisArea.py" />
         <option value="$PROJECT_DIR$/Tetrimus.py" />
         <option value="$PROJECT_DIR$/resources/views/ClassicGame.kv" />
-        <option value="$PROJECT_DIR$/Screens/ClassicGameScreen.py" />
         <option value="$PROJECT_DIR$/Entities/PieceSpawner.py" />
         <option value="$PROJECT_DIR$/Entities/Piece.py" />
+        <option value="$PROJECT_DIR$/Screens/ClassicGameScreen.py" />
+        <option value="$PROJECT_DIR$/Entities/TetrisArea.py" />
       </list>
     </option>
   </component>
@@ -666,26 +666,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Entities/TetrisGrid.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
-          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-          <folding>
-            <element signature="e#27#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Entities/TetrisArea.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="91" max-vertical-offset="680">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding>
-            <element signature="e#27#71#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/ClassicGame.kv">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="782">
@@ -694,10 +674,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Interfaces/TetrisAware.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
+          <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
+          <folding>
+            <element signature="e#27#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Tetrimus.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -705,9 +695,19 @@
     <entry file="file://$PROJECT_DIR$/Screens/ClassicGameScreen.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="125" max-vertical-offset="714">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding>
             <element signature="e#27#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Entities/Piece.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3440" max-vertical-offset="4029">
+          <caret line="92" column="47" selection-start-line="92" selection-start-column="47" selection-end-line="92" selection-end-column="47" />
+          <folding>
+            <element signature="e#27#80#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -722,22 +722,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Interfaces/TetrisAware.py">
+    <entry file="file://$PROJECT_DIR$/Entities/TetrisGrid.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
-          <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
           <folding>
             <element signature="e#27#61#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Entities/Piece.py">
+    <entry file="file://$PROJECT_DIR$/Entities/TetrisArea.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9134126" vertical-offset="1026" max-vertical-offset="4029">
-          <caret line="92" column="47" selection-start-line="92" selection-start-column="47" selection-end-line="92" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.8556876" vertical-offset="159" max-vertical-offset="765">
+          <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
           <folding>
-            <element signature="e#27#80#0" expanded="true" />
+            <element signature="e#28#72#0" expanded="true" />
           </folding>
         </state>
       </provider>

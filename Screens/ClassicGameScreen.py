@@ -31,7 +31,7 @@ class ClassicGameScreen(Screen):
 
     def restart(self, *args):
         self.on_leave()
-        self.spawn.new_piece()
+        self.on_enter()
 
     def game_lost(self):
         Clock.schedule_once(self.restart, 10)
