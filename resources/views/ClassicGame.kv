@@ -20,14 +20,6 @@ ClassicGameScreen:
         pos: root.width / 4 - self.width / 2, root.center_y - self.height / 2
         shape: (10, 20)
 
-        canvas:
-            Color:
-                rgba: .5, 0, .5, 1
-
-            Rectangle:
-                size: self.size
-                pos: self.pos
-
         TetrisGrid:
             id: TetrisGrid
             pos: self.parent.pos

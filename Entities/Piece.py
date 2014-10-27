@@ -121,8 +121,8 @@ class Piece(SparseGridLayout, TetrisAware):
         for child in self.children:
             self.outline.add(Color(.5, .8, 1, .8))
             self.outline.add(Rectangle(
-                    size=(child.width + 4, child.height + 4),
-                    pos=(child.x - 2, child.y - 2)
+                size=(child.width + 4, child.height + 4),
+                pos=(child.x - 2, child.y - 2)
             ))
 
         if self.canvas.before:
@@ -234,8 +234,8 @@ class ErrorPiece(Piece):
             for child in self.children[:]:
                 self.outline.add(Color(1, .2, .2, .8))
                 self.outline.add(Rectangle(
-                        size=(child.width + 4, child.height + 4),
-                        pos=(child.x - 2, child.y - 2)
+                    size=(child.width + 4, child.height + 4),
+                    pos=(child.x - 2, child.y - 2)
                 ))
 
             if self.canvas.before:

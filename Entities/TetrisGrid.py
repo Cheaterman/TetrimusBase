@@ -12,9 +12,7 @@ class TetrisGrid(Widget):
 
     def redraw(self, *args):
         with self.canvas:
-            for x in range(self.parent.cols):
-                for y in range(self.parent.rows):
-                    Color(1, .5, 0)
-                    Rectangle(size=self.parent.tile_size(), pos=(self.parent.coord_to_pos(x, y)))
-                    Color(0, 0, 0)
-                    Rectangle(size=self.parent.tile_size((-2, -2)), pos=(self.parent.coord_to_pos(x, y, (1, 1))))
+            Color(1, .5, 0)
+            Rectangle(size=self.size, pos=self.pos)
+            Color(0, 0, 0)
+            Rectangle(size=(self.width - 2, self.height - 2), pos=(self.x + 1, self.y + 1))

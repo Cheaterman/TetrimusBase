@@ -11,4 +11,4 @@ class TetrisAware():
     def __init__(self, **kwargs):
         if 'tetris_coords' in kwargs:
             self.tetris_coords = list(kwargs['tetris_coords'])
-        super(TetrisAware, self).__init__()
+        super(TetrisAware, self).__init__(**kwargs)
