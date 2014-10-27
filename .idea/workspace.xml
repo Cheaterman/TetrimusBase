@@ -55,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Piece.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Piece.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Entities/Piece.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3440" max-vertical-offset="4029">
-              <caret line="92" column="47" selection-start-line="92" selection-start-column="47" selection-end-line="92" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.82682514" vertical-offset="2930" max-vertical-offset="4267">
+              <caret line="201" column="12" selection-start-line="201" selection-start-column="12" selection-end-line="201" selection-end-column="12" />
               <folding>
                 <element signature="e#27#80#0" expanded="true" />
               </folding>
@@ -103,10 +103,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TetrisArea.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TetrisArea.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Entities/TetrisArea.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8556876" vertical-offset="159" max-vertical-offset="765">
+            <state vertical-scroll-proportion="0.0" vertical-offset="159" max-vertical-offset="765">
               <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
               <folding>
                 <element signature="e#28#72#0" expanded="true" />
@@ -169,9 +169,9 @@
         <option value="$PROJECT_DIR$/Tetrimus.py" />
         <option value="$PROJECT_DIR$/resources/views/ClassicGame.kv" />
         <option value="$PROJECT_DIR$/Entities/PieceSpawner.py" />
-        <option value="$PROJECT_DIR$/Entities/Piece.py" />
         <option value="$PROJECT_DIR$/Screens/ClassicGameScreen.py" />
         <option value="$PROJECT_DIR$/Entities/TetrisArea.py" />
+        <option value="$PROJECT_DIR$/Entities/Piece.py" />
       </list>
     </option>
   </component>
@@ -702,16 +702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Entities/Piece.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3440" max-vertical-offset="4029">
-          <caret line="92" column="47" selection-start-line="92" selection-start-column="47" selection-end-line="92" selection-end-column="47" />
-          <folding>
-            <element signature="e#27#80#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Entities/PieceSpawner.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1298" max-vertical-offset="1955">
@@ -734,10 +724,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Entities/TetrisArea.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8556876" vertical-offset="159" max-vertical-offset="765">
+        <state vertical-scroll-proportion="0.0" vertical-offset="159" max-vertical-offset="765">
           <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
           <folding>
             <element signature="e#28#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Entities/Piece.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.82682514" vertical-offset="2930" max-vertical-offset="4267">
+          <caret line="201" column="12" selection-start-line="201" selection-start-column="12" selection-end-line="201" selection-end-column="12" />
+          <folding>
+            <element signature="e#27#80#0" expanded="true" />
           </folding>
         </state>
       </provider>
