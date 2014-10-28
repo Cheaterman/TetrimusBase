@@ -1,7 +1,7 @@
 __author__ = 'Cheaterman'
 
 from kivy.uix.widget import Widget
-from kivy.graphics import Color, Rectangle
+from kivy.graphics import Color, Line
 
 
 
@@ -13,6 +13,13 @@ class TetrisGrid(Widget):
     def redraw(self, *args):
         with self.canvas:
             Color(1, .5, 0)
-            Rectangle(size=self.size, pos=self.pos)
-            Color(0, 0, 0)
-            Rectangle(size=(self.width - 2, self.height - 2), pos=(self.x + 1, self.y + 1))
+            Line(
+                points=[
+                    self.x - 1, self.y - 1,
+                    self.right + 1, self.y - 1,
+                    self.right + 1, self.top + 1,
+                    self.x - 1, self.top + 1
+                ],
+                close=True,
+                width=1.5
+            )

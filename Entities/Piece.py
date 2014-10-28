@@ -3,7 +3,7 @@ __author__ = 'Cheaterman'
 from Layouts.SparseGridLayout import SparseGridLayout
 from kivy.clock import Clock
 from kivy.core.window import Window
-from kivy.graphics import Color, Rectangle, InstructionGroup
+from kivy.graphics import Color, Line, InstructionGroup
 from kivy.properties import ListProperty
 from Entities.Block import Block
 from Interfaces.TetrisAware import TetrisAware
@@ -120,9 +120,15 @@ class Piece(SparseGridLayout, TetrisAware):
         self.outline = InstructionGroup()
         for child in self.children:
             self.outline.add(Color(.5, .8, 1, .8))
-            self.outline.add(Rectangle(
-                size=(child.width + 4, child.height + 4),
-                pos=(child.x - 2, child.y - 2)
+            self.outline.add(Line(
+                points=[
+                    child.x - 1, child.y - 1,
+                    child.right + 1, child.y - 1,
+                    child.right + 1, child.top + 1,
+                    child.x - 1, child.top + 1
+                ],
+                close=True,
+                width=1.5
             ))
 
         if self.canvas.before:
@@ -233,10 +239,16 @@ class ErrorPiece(Piece):
         if self.highlight:
             for child in self.children[:]:
                 self.outline.add(Color(1, .2, .2, .8))
-                self.outline.add(Rectangle(
-                    size=(child.width + 4, child.height + 4),
-                    pos=(child.x - 2, child.y - 2)
-                ))
+                self.outline.add(Line(
+                points=[
+                    child.x - 1, child.y - 1,
+                    child.right + 1, child.y - 1,
+                    child.right + 1, child.top + 1,
+                    child.x - 1, child.top + 1
+                ],
+                close=True,
+                width=1.5
+            ))
 
             if self.canvas.before:
                 self.canvas.before.add(self.outline)

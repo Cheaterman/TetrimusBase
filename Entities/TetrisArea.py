@@ -59,10 +59,8 @@ class TetrisArea(FloatLayout, GridAware):
             )
 
         self.add_widget(explosion)
-        print 'Removed line ', line, ', added explosion at height ', explosion.pos[1]
 
         def remove(self, widget):
-            print 'Removed explosion at height ', widget.pos[1]
             widget.parent.remove_widget(widget)
 
         anim = Animation(

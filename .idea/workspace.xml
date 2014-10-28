@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aac91f6b-6f9e-4d91-8fc1-d579187200c5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/ClassicGame.kv" afterPath="$PROJECT_DIR$/resources/views/ClassicGame.kv" />
+    <list default="true" id="aac91f6b-6f9e-4d91-8fc1-d579187200c5" name="Default" comment="Added some eye candy on line removal :)">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Entities/Piece.py" afterPath="$PROJECT_DIR$/Entities/Piece.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tetrimus.py" afterPath="$PROJECT_DIR$/Tetrimus.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Entities/TetrisArea.py" afterPath="$PROJECT_DIR$/Entities/TetrisArea.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Interfaces/TetrisAware.py" afterPath="$PROJECT_DIR$/Interfaces/TetrisAware.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Entities/TetrisGrid.py" afterPath="$PROJECT_DIR$/Entities/TetrisGrid.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Tetrimus.iws" />
@@ -36,7 +31,7 @@
       <file leaf-file-name="ClassicGame.kv" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/ClassicGame.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="57" max-vertical-offset="646">
+            <state vertical-scroll-proportion="0.0" vertical-offset="56" max-vertical-offset="646">
               <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding />
             </state>
@@ -46,17 +41,17 @@
       <file leaf-file-name="ClassicGameScreen.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Screens/ClassicGameScreen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="125" max-vertical-offset="714">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
               <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Tetrimus.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Tetrimus.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tetrimus.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6830509" vertical-offset="73" max-vertical-offset="663">
+            <state vertical-scroll-proportion="0.0" vertical-offset="73" max-vertical-offset="663">
               <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
@@ -66,8 +61,8 @@
       <file leaf-file-name="Piece.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Entities/Piece.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3167" max-vertical-offset="4301">
-              <caret line="205" column="0" selection-start-line="205" selection-start-column="0" selection-end-line="205" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3860" max-vertical-offset="4505">
+              <caret line="248" column="27" selection-start-line="248" selection-start-column="27" selection-end-line="249" selection-end-column="25" />
               <folding>
                 <element signature="e#27#80#0" expanded="true" />
               </folding>
@@ -88,19 +83,21 @@
       <file leaf-file-name="PieceSpawner.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Entities/PieceSpawner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1161" max-vertical-offset="1853">
-              <caret line="105" column="47" selection-start-line="105" selection-start-column="47" selection-end-line="105" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1263" max-vertical-offset="1853">
+              <caret line="103" column="43" selection-start-line="103" selection-start-column="43" selection-end-line="103" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TetrisGrid.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="TetrisGrid.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Entities/TetrisGrid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="391">
-              <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
-              <folding />
+            <state vertical-scroll-proportion="0.43220338" vertical-offset="0" max-vertical-offset="590">
+              <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="24" selection-end-column="13" />
+              <folding>
+                <element signature="e#27#61#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -108,8 +105,8 @@
       <file leaf-file-name="TetrisArea.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Entities/TetrisArea.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="668" max-vertical-offset="1326">
-              <caret line="53" column="39" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="702" max-vertical-offset="1292">
+              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
               <folding>
                 <element signature="e#27#71#0" expanded="true" />
               </folding>
@@ -120,7 +117,7 @@
       <file leaf-file-name="GridAware.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Interfaces/GridAware.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="374">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
               <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding />
             </state>
@@ -130,7 +127,7 @@
       <file leaf-file-name="Block.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Entities/Block.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="289">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
               <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding />
             </state>
@@ -168,11 +165,11 @@
         <option value="$PROJECT_DIR$/Entities/PieceSpawner.py" />
         <option value="$PROJECT_DIR$/Screens/ClassicGameScreen.py" />
         <option value="$PROJECT_DIR$/resources/views/ClassicGame.kv" />
-        <option value="$PROJECT_DIR$/Entities/TetrisGrid.py" />
         <option value="$PROJECT_DIR$/Interfaces/TetrisAware.py" />
+        <option value="$PROJECT_DIR$/Tetrimus.py" />
+        <option value="$PROJECT_DIR$/Entities/TetrisGrid.py" />
         <option value="$PROJECT_DIR$/Entities/TetrisArea.py" />
         <option value="$PROJECT_DIR$/Entities/Piece.py" />
-        <option value="$PROJECT_DIR$/Tetrimus.py" />
       </list>
     </option>
   </component>
@@ -339,7 +336,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="L:/Git/bin/git.exe" />
-    <property name="options.lastSelected" value="vcs.Git" />
+    <property name="options.lastSelected" value="settings.github" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -532,12 +529,18 @@
       <created>1413841872036</created>
       <updated>1413841872036</updated>
     </task>
+    <task id="LOCAL-00001" summary="Added some eye candy on line removal :)">
+      <created>1414440624919</created>
+      <updated>1414440624919</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1928" height="1035" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -545,8 +548,8 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24960506" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32824427" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32824427" sideWeight="0.5002633" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32824427" sideWeight="0.4997367" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -572,6 +575,8 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="Added some eye candy on line removal :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added some eye candy on line removal :)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -633,7 +638,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="391">
           <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
-          <folding />
+          <folding>
+            <element signature="e#27#61#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -726,6 +733,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Interfaces/TetrisAware.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+          <caret line="13" column="51" selection-start-line="13" selection-start-column="51" selection-end-line="13" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tetrimus.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="73" max-vertical-offset="663">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Interfaces/GridAware.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
@@ -742,19 +765,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/ClassicGame.kv">
+    <entry file="file://$PROJECT_DIR$/Entities/PieceSpawner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="57" max-vertical-offset="646">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1263" max-vertical-offset="1853">
+          <caret line="103" column="43" selection-start-line="103" selection-start-column="43" selection-end-line="103" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Entities/TetrisGrid.py">
+    <entry file="file://$PROJECT_DIR$/Entities/Piece.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
-          <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3860" max-vertical-offset="4505">
+          <caret line="248" column="27" selection-start-line="248" selection-start-column="27" selection-end-line="249" selection-end-column="25" />
+          <folding>
+            <element signature="e#27#80#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -766,47 +791,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Interfaces/TetrisAware.py">
+    <entry file="file://$PROJECT_DIR$/resources/views/ClassicGame.kv">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
-          <caret line="13" column="51" selection-start-line="13" selection-start-column="51" selection-end-line="13" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Entities/PieceSpawner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1298" max-vertical-offset="1955">
-          <caret line="105" column="47" selection-start-line="105" selection-start-column="47" selection-end-line="105" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="57" max-vertical-offset="646">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Entities/TetrisArea.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="668" max-vertical-offset="1326">
-          <caret line="53" column="39" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="1292">
+          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
           <folding>
             <element signature="e#27#71#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Entities/Piece.py">
+    <entry file="file://$PROJECT_DIR$/Entities/TetrisGrid.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3167" max-vertical-offset="4301">
-          <caret line="205" column="0" selection-start-line="205" selection-start-column="0" selection-end-line="205" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.43220338" vertical-offset="0" max-vertical-offset="590">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="24" selection-end-column="13" />
           <folding>
-            <element signature="e#27#80#0" expanded="true" />
+            <element signature="e#27#61#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tetrimus.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6830509" vertical-offset="73" max-vertical-offset="663">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
