@@ -69,3 +69,6 @@ class TetrisArea(FloatLayout, GridAware):
         )
         anim.bind(on_complete=remove)
         anim.start(explosion)
+
+    def preview_update(self):
+        pass

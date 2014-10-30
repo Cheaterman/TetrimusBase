@@ -42,16 +42,20 @@ class PieceSpawner(Widget):
             [
                 ['x', 'x'],
                 ['x', 'x']
-            ],
+            ]
         ]
 
-        self.colors = []
-
-        for i in range(0, 360, 30):
-            self.colors.append(Color(i / 360., .5, 1, mode='hsv'))
+        self.colors = [
+            Color(  0. / 360., .5, 1, mode='hsv'),
+            Color(120. / 360., .5, 1, mode='hsv'),
+            Color(260. / 360., .5, 1, mode='hsv'),
+            Color(240. / 360., .5, 1, mode='hsv'),
+            Color( 20. / 360., .5, 1, mode='hsv'),
+            Color(160. / 360., .5, 1, mode='hsv'),
+            Color(60. / 360., .5, 1, mode='hsv')
+        ]
 
         self.next_pieces = deque([])
-        self.next_colors = deque([])
 
         self.bind(preview=self.on_preview)
         self.on_preview(self, self.preview)
@@ -59,19 +63,19 @@ class PieceSpawner(Widget):
     def on_preview(self, instance, value):
         while len(self.next_pieces) < self.preview:
             self.next_pieces.appendleft(random.randrange(len(self.pieces)))
-            self.next_colors.appendleft(random.randrange(len(self.colors)))
+        if self.parent:
+            self.parent.gamearea.preview_update()
 
     def new_piece(self):
         area = self.parent.gamearea
         current_piece = self.next_pieces.pop()
-        current_color = self.next_colors.pop()
+        current_color = self.colors[current_piece]
         self.on_preview(self, self.preview)
 
         map = self.pieces[current_piece]
         for i in range(random.randrange(4)):
             map = zip(*map[::-1])
 
-        color = self.colors[current_color]
         tetris_coords = (area.cols / 2 - len(map[0]) / 2, area.rows - len(map))
 
         if not self.check_spawn(tetris_coords, map):
@@ -81,7 +85,7 @@ class PieceSpawner(Widget):
 
         piece.pos = area.coord_to_pos(*tetris_coords)
         piece.size_hint = (None, None)
-        piece.color = (color.r, color.g, color.b, color.a)
+        piece.color = (current_color.r, current_color.g, current_color.b, current_color.a)
 
         piece.height = len(map) * area.tile_size()[1]
         piece.width = len(map[0]) * area.tile_size()[0]
