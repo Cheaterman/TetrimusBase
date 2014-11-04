@@ -73,8 +73,13 @@ class PieceSpawner(Widget):
         self.on_preview(self, self.preview)
 
         map = self.pieces[current_piece]
+
+        """
+            No more random rotation. Just like random colors, they made the game counter-intuitive.
+
         for i in range(random.randrange(4)):
             map = zip(*map[::-1])
+        """
 
         tetris_coords = (area.cols / 2 - len(map[0]) / 2, area.rows - len(map))
 
@@ -84,7 +89,6 @@ class PieceSpawner(Widget):
             piece = ErrorPiece()
 
         piece.pos = area.coord_to_pos(*tetris_coords)
-        piece.size_hint = (None, None)
         piece.color = (current_color.r, current_color.g, current_color.b, current_color.a)
 
         piece.height = len(map) * area.tile_size()[1]

@@ -15,6 +15,9 @@ ClassicGameScreen:
     TetrisArea:
         id: TetrisArea
         grid: TetrisGrid
+        preview1: PreviewPiece1
+        preview2: PreviewPiece2
+        preview3: PreviewPiece3
 
         size_hint: .4 * root.height / root.width, .8
         pos: root.width / 4 - self.width / 2, root.center_y - self.height / 2
@@ -25,6 +28,30 @@ ClassicGameScreen:
             pos: self.parent.pos
             size: self.parent.size
             shape: self.parent.shape
+
+        PreviewPiece:
+            id: PreviewPiece1
+            width: self.parent.width * .4
+            height: self.parent.height / 20
+            x: self.parent.coord_to_pos(self.parent.cols / 2 - self.cols / 2, 0)[0]
+            y: self.parent.top
+            tetris_coords: -1, -1
+
+        PreviewPiece:
+            id: PreviewPiece2
+            width: self.parent.width * .2
+            height: self.parent.height / 40
+            x: self.parent.center_x - self.parent.width * 3 / 8 - self.width / 2
+            y: self.parent.top + self.height / self.rows * 2
+            tetris_coords: -1, -1
+
+        PreviewPiece:
+            id: PreviewPiece3
+            width: self.parent.width * .1
+            height: self.parent.height / 80
+            x: self.parent.x
+            y: self.parent.top + self.height / self.rows
+            tetris_coords: -1, -1
 
     PieceSpawner:
         id: PieceSpawner

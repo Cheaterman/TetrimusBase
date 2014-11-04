@@ -20,6 +20,7 @@ class Piece(SparseGridLayout, TetrisAware):
         if 'color' in kwargs:
             self.color = kwargs['color']
 
+        self.size_hint = (None, None)
         super(SparseGridLayout, self).__init__(**kwargs)
 
         self.bind(map=self.on_map)
@@ -29,6 +30,7 @@ class Piece(SparseGridLayout, TetrisAware):
         )
 
         self.vertical = False
+        self.rotating = False
 
         Clock.schedule_interval(self.update, .5)
 
@@ -150,6 +152,11 @@ class Piece(SparseGridLayout, TetrisAware):
             self.tetris_coords[0] += 1
 
     def rotate(self, **kwargs):
+        if self.rotating:
+            self.rotating = False
+            return
+        self.rotating = True
+
         direction = 'ccw'
         if 'direction' in kwargs:
             direction = kwargs['direction']
@@ -265,3 +272,25 @@ class ErrorPiece(Piece):
             self.canvas.before.remove(self.outline)
 
             self.highlight = True
+
+class PreviewPiece(Piece):
+    def update(self, *args):
+        pass
+
+    def on_keypress(self, keyboard, key, keycode, modifiers):
+        return True
+
+    def on_tetris_coords(self, *args):
+        if hasattr(self.parent, 'coord_to_pos'):
+            self.pos = self.parent.coord_to_pos(*self.tetris_coords)
+
+        for child in self.children:
+            child.tetris_coords = [self.tetris_coords[0] + child.col, self.tetris_coords[1] + child.row]
+
+    def do_layout(self, *args):
+        super(Piece, self).do_layout(*args)
+
+    def on_map(self, instance, value):
+        for child in self.children:
+            child.color = self.color
+        super(PreviewPiece, self).on_map(instance, value)

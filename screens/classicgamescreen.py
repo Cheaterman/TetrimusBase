@@ -9,7 +9,7 @@ from kivy.properties import ObjectProperty
 from entities import Block
 from entities import TetrisArea
 from entities import TetrisGrid
-from entities import Piece
+from entities import Piece, PreviewPiece
 from entities import PieceSpawner
 
 
@@ -24,7 +24,8 @@ class ClassicGameScreen(Screen):
 
     def on_leave(self, *args):
         for child in self.gamearea.children[:]:
-            if not isinstance(child, TetrisGrid):
+            if not isinstance(child, TetrisGrid)\
+               and not isinstance(child, PreviewPiece):
                 self.gamearea.remove_widget(child)
 
         Clock.unschedule(self.restart)

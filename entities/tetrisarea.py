@@ -5,6 +5,7 @@ from kivy.animation import Animation
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Rectangle
 from kivy.properties import ObjectProperty
+from collections import deque
 from interfaces import GridAware
 from entities import TetrisGrid
 from entities import Block
@@ -13,6 +14,9 @@ from entities import Block
 
 class TetrisArea(FloatLayout, GridAware):
     grid = ObjectProperty(None)
+    preview1 = ObjectProperty(None)
+    preview2 = ObjectProperty(None)
+    preview3 = ObjectProperty(None)
 
     def check_line(self):
         y = 0
@@ -71,4 +75,31 @@ class TetrisArea(FloatLayout, GridAware):
         anim.start(explosion)
 
     def preview_update(self):
-        pass
+        spawner = self.parent.spawn
+        next = deque(spawner.next_pieces)
+        pieces = [
+            next.pop(),
+            next.pop(),
+            next.pop()
+        ]
+        previews = [
+            self.preview1,
+            self.preview2,
+            self.preview3
+        ]
+        sizes = [
+            1,
+            .5,
+            .25
+        ]
+
+        for i in range(len(previews)):
+            current_map = spawner.pieces[pieces[i]]
+            current_color = spawner.colors[pieces[i]]
+            previews[i].color = (current_color.r, current_color.g, current_color.b, current_color.a)
+            previews[i].shape = (len(current_map[0]), len(current_map))
+            previews[i].size = (
+                self.tile_size()[0] * len(current_map[0]) * sizes[i],
+                self.tile_size()[1] * len(current_map) * sizes[i]
+            )
+            previews[i].map = current_map

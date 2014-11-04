@@ -15,11 +15,10 @@ class TetrisGrid(Widget):
             Color(1, .5, 0)
             Line(
                 points=[
+                    self.x - 1, self.top + 1,
                     self.x - 1, self.y - 1,
                     self.right + 1, self.y - 1,
-                    self.right + 1, self.top + 1,
-                    self.x - 1, self.top + 1
+                    self.right + 1, self.top + 1
                 ],
-                close=True,
                 width=1.5
             )
