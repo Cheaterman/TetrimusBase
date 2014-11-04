@@ -7,6 +7,7 @@ MenuScreen:
         Rectangle:
             pos: self.pos
             size: self.size
+            source: 'resources/images/menu_background.png'
 
     GridLayout:
         cols: 1
@@ -14,7 +15,7 @@ MenuScreen:
         row_force_default: True
         spacing: 25
         size_hint: 0.3, None
-        pos: root.center_x + root.width * 0.4 - self.width, root.center_y + self.height / 2
+        pos: root.center_x + root.width * 0.45 - self.width, root.center_y + self.height / 2
 
         OSButton:
             text: 'Classic mode'
