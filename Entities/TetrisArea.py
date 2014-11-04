@@ -5,9 +5,9 @@ from kivy.animation import Animation
 from kivy.uix.widget import Widget
 from kivy.graphics import Color, Rectangle
 from kivy.properties import ObjectProperty
-from Interfaces.GridAware import GridAware
-from Entities.TetrisGrid import TetrisGrid
-from Entities.Block import Block
+from interfaces import GridAware
+from entities import TetrisGrid
+from entities import Block
 
 
 

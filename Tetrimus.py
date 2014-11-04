@@ -10,25 +10,16 @@ Config.set('input', 'mouse', 'mouse,disable_multitouch')
 
 from kivy.app import App
 from kivy.core.window import Window
-from Screens.TetrimusScreenManager import TetrimusScreenManager
+from screens import TetrimusScreenManager
+from entities import KeyboardManager
 
 
 
 class TetrimusApp(App):
     def build(self):
-        self.keyboard = Window.request_keyboard(self.keyboard_closed, self, 'text')
-        self.keyboard.bind(on_key_down=self.on_keypress)
+        self.keyboard = KeyboardManager()
+
         return TetrimusScreenManager()
-
-    def keyboard_closed(self):
-        if self.keyboard:
-            self.keyboard.unbind(on_key_down=self.on_keypress)
-            self.keyboard = None
-
-    def on_keypress(self, keyboard, keycode, text, modifiers):
-        return True
-
-
 
 if __name__ == '__main__':
     TetrimusApp().run()

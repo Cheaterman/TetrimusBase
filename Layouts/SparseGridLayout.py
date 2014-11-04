@@ -2,7 +2,7 @@ __author__ = 'Cheaterman'
 
 from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import NumericProperty, ReferenceListProperty
-from Interfaces.GridAware import GridAware
+from interfaces.gridaware import GridAware
 
 
 

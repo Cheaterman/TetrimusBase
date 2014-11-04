@@ -6,7 +6,7 @@ from kivy.graphics import Color
 from kivy.properties import NumericProperty
 from collections import deque
 import random
-from Entities.Piece import Piece, ErrorPiece
+from entities import Piece, ErrorPiece
 
 
 

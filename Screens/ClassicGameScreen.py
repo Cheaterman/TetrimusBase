@@ -6,11 +6,11 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.animation import Animation
 from kivy.clock import Clock
 from kivy.properties import ObjectProperty
-from Entities.Block import Block
-from Entities.TetrisArea import TetrisArea
-from Entities.TetrisGrid import TetrisGrid
-from Entities.Piece import Piece
-from Entities.PieceSpawner import PieceSpawner
+from entities import Block
+from entities import TetrisArea
+from entities import TetrisGrid
+from entities import Piece
+from entities import PieceSpawner
 
 
 

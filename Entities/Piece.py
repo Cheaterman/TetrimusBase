@@ -1,12 +1,14 @@
 __author__ = 'Cheaterman'
 
-from Layouts.SparseGridLayout import SparseGridLayout
+from kivy.app import App
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.graphics import Color, Line, InstructionGroup
 from kivy.properties import ListProperty
-from Entities.Block import Block
-from Interfaces.TetrisAware import TetrisAware
+from layouts import SparseGridLayout
+from entities import Block
+from entities import KeyboardManager
+from interfaces import TetrisAware
 from math import ceil, floor
 
 
@@ -18,18 +20,16 @@ class Piece(SparseGridLayout, TetrisAware):
         if 'color' in kwargs:
             self.color = kwargs['color']
 
-        self.vertical = False
-
         super(SparseGridLayout, self).__init__(**kwargs)
 
         self.bind(map=self.on_map)
 
-        self.keyboard = Window.request_keyboard(self.keyboard_closed, self, 'text')
-        self.keyboard.bind(
-            on_key_down=self.on_keypress,
-            on_key_up=self.on_keyrelease
+        App.get_running_app().keyboard.bind(
+            self.on_keypress
         )
-        self.moving = 'no'
+
+        self.vertical = False
+
         Clock.schedule_interval(self.update, .5)
 
     def on_map(self, instance, value):
@@ -47,6 +47,7 @@ class Piece(SparseGridLayout, TetrisAware):
     def update(self, *args):
         if not self.parent:
             Clock.unschedule(self.update)
+            self.keyboard_closed()
             return
 
         if self.tetris_coords[1] == 0 or self.collide_piece('down'):
@@ -115,12 +116,6 @@ class Piece(SparseGridLayout, TetrisAware):
         for child in self.children:
             child.tetris_coords = [self.tetris_coords[0] + child.col, self.tetris_coords[1] + child.row]
 
-    def key_hold(self, *args):
-        if self.moving == 'right' and not self.collide_piece('right'):
-            self.tetris_coords[0] += 1
-        if self.moving == 'left' and not self.collide_piece('left'):
-            self.tetris_coords[0] -= 1
-
     def do_layout(self, *args):
         super(Piece, self).do_layout(*args)
 
@@ -149,17 +144,10 @@ class Piece(SparseGridLayout, TetrisAware):
                     self.canvas.before.remove(self.outline)
 
     def move(self, direction):
-        if direction == 'no':
-            self.moving = 'no'
-            Clock.unschedule(self.key_hold)
-        elif self.moving == 'no':
-            Clock.schedule_interval(self.key_hold, .12)
-            self.moving = direction
-
-            if direction == 'left' and not self.collide_piece('left'):
-                self.tetris_coords[0] -= 1
-            if direction == 'right' and not self.collide_piece('right'):
-                self.tetris_coords[0] += 1
+        if direction == 'left' and not self.collide_piece('left'):
+            self.tetris_coords[0] -= 1
+        if direction == 'right' and not self.collide_piece('right'):
+            self.tetris_coords[0] += 1
 
     def rotate(self, **kwargs):
         direction = 'ccw'
@@ -200,30 +188,30 @@ class Piece(SparseGridLayout, TetrisAware):
 
         return self.tetris_coords[0] + map_diff[0], self.tetris_coords[1] + map_diff[1]
 
-    def on_keypress(self, keyboard, keycode, text, modifiers):
-        if keycode[1] == 'q':
+    def on_keypress(self, keyboard, key, keycode, modifiers):
+        if keycode == 16: # 'q' on qwerty
             self.rotate(direction='ccw')
-        elif keycode[1] == 'e':
+        elif keycode == 18: # 'e'
             self.rotate(direction='cw')
-        elif keycode[1] == 'a':
+        elif keycode == 30: # 'a' on qwerty
             self.move('left')
-        elif keycode[1] == 'd':
+        elif keycode == 32: # 'd'
             self.move('right')
-        elif keycode[1] == 's':
+        elif keycode == 31: # 's'
             if not self.collide_piece('down'):
                 self.tetris_coords[1] -= 1
             self.update()
-        elif keycode[1] == 'z':
+        elif keycode == 44: # 'z' on qwerty
             self.rotate(direction='ccw')
-        elif keycode[1] == 'x':
+        elif keycode == 45: # 'x'
             self.rotate(direction='cw')
-        elif keycode[1] == 'left':
+        elif keycode == 203: # left arrow
             self.move('left')
-        elif keycode[1] == 'right':
+        elif keycode == 205: # right arrow
             self.move('right')
-        elif keycode[1] == 'up':
+        elif keycode == 200: # up arrow
             self.rotate(direction='ccw')
-        elif keycode[1] == 'down':
+        elif keycode == 208: # down arrow
             if not self.collide_piece('down'):
                 self.tetris_coords[1] -= 1
             self.update()
@@ -232,22 +220,10 @@ class Piece(SparseGridLayout, TetrisAware):
 
         return False
 
-    def on_keyrelease(self, keyboard, keycode):
-        if (keycode[1] == 'a'
-            or keycode[1] == 'd'
-            or keycode[1] == 'left'
-            or keycode[1] == 'right'):
-            self.move('no')
-        else:
-            return True
-
     def keyboard_closed(self):
-        if self.keyboard:
-            self.keyboard.unbind(
-                on_key_down=self.on_keypress,
-                on_key_up=self.on_keyrelease
-            )
-            self.keyboard = None
+        App.get_running_app().keyboard.unbind(
+            self.on_keypress
+        )
 
 class ErrorPiece(Piece):
     def __init__(self, **kwargs):

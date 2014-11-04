@@ -1,7 +1,7 @@
 __author__ = 'Cheaterman'
 
 from kivy.uix.image import Image
-from Interfaces.TetrisAware import TetrisAware
+from interfaces.tetrisaware import TetrisAware
 from kivy.properties import ReferenceListProperty, NumericProperty
 
 
