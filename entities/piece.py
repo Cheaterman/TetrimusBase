@@ -207,13 +207,17 @@ class Piece(SparseGridLayout, TetrisAware):
             self.rotate(direction='ccw')
         elif keycode == 45: # 'x'
             self.rotate(direction='cw')
-        elif keycode == 203: # left arrow
+        elif keycode == 203 \
+            or keycode == 276: # left arrow, left arrow (OSX)
             self.move('left')
-        elif keycode == 205: # right arrow
+        elif keycode == 205 \
+            or keycode == 275: # right arrow, right arrow (OSX)
             self.move('right')
-        elif keycode == 200: # up arrow
+        elif keycode == 200 \
+            or keycode == 273: # up arrow, up arrow (OSX)
             self.rotate(direction='ccw')
-        elif keycode == 208: # down arrow
+        elif keycode == 208 \
+            or keycode == 274: # down arrow, down arrow (OSX)
             if not self.collide_piece('down'):
                 self.tetris_coords[1] -= 1
             self.update()
