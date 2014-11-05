@@ -26,13 +26,13 @@ class Piece(SparseGridLayout, TetrisAware):
         self.bind(map=self.on_map)
 
         App.get_running_app().keyboard.bind(
-            self.on_keypress
+            on_key_down=self.on_keypress
         )
 
         self.vertical = False
-        self.rotating = False
 
         Clock.schedule_interval(self.update, .5)
+
 
     def on_map(self, instance, value):
         current_child = 0
@@ -152,11 +152,6 @@ class Piece(SparseGridLayout, TetrisAware):
             self.tetris_coords[0] += 1
 
     def rotate(self, **kwargs):
-        if self.rotating:
-            self.rotating = False
-            return
-        self.rotating = True
-
         direction = 'ccw'
         if 'direction' in kwargs:
             direction = kwargs['direction']
@@ -229,7 +224,7 @@ class Piece(SparseGridLayout, TetrisAware):
 
     def keyboard_closed(self):
         App.get_running_app().keyboard.unbind(
-            self.on_keypress
+            on_key_down=self.on_keypress
         )
 
 class ErrorPiece(Piece):
@@ -278,6 +273,9 @@ class PreviewPiece(Piece):
         pass
 
     def on_keypress(self, keyboard, key, keycode, modifiers):
+        return True
+
+    def on_keyrelease(self, keyboard, keycode):
         return True
 
     def on_tetris_coords(self, *args):
