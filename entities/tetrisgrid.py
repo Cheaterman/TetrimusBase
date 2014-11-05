@@ -22,3 +22,24 @@ class TetrisGrid(Widget):
                 ],
                 width=1.5
             )
+
+            Color(.5, .5, .5, .3)
+
+            tile_size = self.parent.tile_size((-1, -1))
+            for x in range(self.parent.cols):
+                for y in range(self.parent.rows):
+                    coords = [
+                        self.parent.coord_to_pos(x, y, (0,            0)),
+                        self.parent.coord_to_pos(x, y, (tile_size[0], 0)),
+                        self.parent.coord_to_pos(x, y, (tile_size[0], tile_size[1])),
+                        self.parent.coord_to_pos(x, y, (0,            tile_size[1]))
+                    ]
+
+                    for coord in coords[:]:
+                        coords.remove(coord)
+                        coords.append(coord[0])
+                        coords.append(coord[1])
+
+                    Line(
+                        points=coords
+                    )
