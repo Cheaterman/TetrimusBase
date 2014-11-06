@@ -157,7 +157,7 @@ class Piece(SparseGridLayout, TetrisAware):
             self.tetris_coords[0] += 1
         if direction == 'down':
             self.keyboard.repeat_delay = 0
-            self.keyboard.repeat_speed /= 2
+            self.keyboard.repeat_speed /= 4
 
             self.update()
 
