@@ -15,10 +15,8 @@ from math import ceil, floor
 class Piece(SparseGridLayout, TetrisAware):
     map = ListProperty([])
 
-    def __init__(self, **kwargs):
-        self.color = (1, 1, 1, 1)
-        if 'color' in kwargs:
-            self.color = kwargs['color']
+    def __init__(self, color=(1, 1, 1, 1), **kwargs):
+        self.color = color
 
         self.size_hint = (None, None)
         super(SparseGridLayout, self).__init__(**kwargs)
