@@ -39,14 +39,14 @@ class KeyboardManager(EventDispatcher):
 
     def hardware_key_down(self, window, key, scancode, codepoint, modifiers):
         if scancode and not self.is_pressed(scancode):
+            self.pressed_keys.append([key, scancode, modifiers])
+            self.dispatch('on_key_down', key, scancode, modifiers)
+
             if self.keypress_breaks_repeat:
                 Clock.unschedule(self.on_key_repeat)
                 Clock.schedule_once(self.start_key_repeat, self.repeat_delay)
             elif len(self.pressed_keys) == 0:
                 Clock.schedule_once(self.start_key_repeat, self.repeat_delay)
-
-            self.pressed_keys.append([key, scancode, modifiers])
-            self.dispatch('on_key_down', key, scancode, modifiers)
 
     def hardware_key_up(self, window, codepoint, scancode):
         if self.is_pressed(scancode):
@@ -62,8 +62,11 @@ class KeyboardManager(EventDispatcher):
                 Clock.unschedule(self.on_key_repeat)
 
     def start_key_repeat(self, *args):
-        Clock.schedule_interval(self.on_key_repeat, self.repeat_speed)
+        Clock.schedule_once(self.on_key_repeat, self.repeat_speed)
 
     def on_key_repeat(self, *args):
         for key, scancode, modifiers in self.pressed_keys:
             self.dispatch('on_key_down', key, scancode, modifiers)
+
+        if len(self.pressed_keys):
+            Clock.schedule_once(self.on_key_repeat, self.repeat_speed)
