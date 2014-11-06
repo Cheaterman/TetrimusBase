@@ -23,7 +23,7 @@ class TetrisGrid(Widget):
                 width=1.5
             )
 
-            Color(.5, .5, .5, .25)
+            Color(.5, .5, .5, .5)
             for x in range(self.parent.cols + 1):
                 coords = self.parent.coord_to_pos(x, 0)
                 Line(
