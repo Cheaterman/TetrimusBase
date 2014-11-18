@@ -39,6 +39,14 @@ class TetrisArea(FloatLayout, GridAware):
 
         if self.currently_exploding:
             self.parent.counter[self.currently_exploding - 1] += 1
+            score_increase = self.currently_exploding ** 2 * 100
+            self.parent.score += score_increase * (self.parent.level if self.parent.level > 0 else 1)
+
+            self.parent.level_progress += score_increase
+
+        if self.parent.level_progress >= 1000:
+            self.parent.level += 1
+            self.parent.level_progress = 0
 
     def remove_line(self, line):
         for child in self.children[:]:

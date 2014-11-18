@@ -21,8 +21,11 @@ class ClassicGameScreen(Screen):
     score = NumericProperty(0)
     level = NumericProperty(0)
 
+    level_progress = NumericProperty(0)
+
     def on_enter(self, *args):
         self.spawn.new_piece()
+        Clock.schedule_interval(self.level_update, .1)
 
     def on_leave(self, *args):
         for child in self.gamearea.children[:]:
@@ -31,6 +34,10 @@ class ClassicGameScreen(Screen):
                 self.gamearea.remove_widget(child)
 
         Clock.unschedule(self.restart)
+        Clock.unschedule(self.level_update)
+
+        self.counter = (0, 0, 0, 0)
+        self.score = self.level = self.level_progress = 0
 
     def restart(self, *args):
         self.on_leave()
@@ -38,3 +45,7 @@ class ClassicGameScreen(Screen):
 
     def game_lost(self):
         Clock.schedule_once(self.restart, 10)
+
+    def level_update(self, *args):
+        self.level_progress += 1
+        print 'DEBUG: %d' % self.level_progress
