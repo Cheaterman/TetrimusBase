@@ -34,6 +34,19 @@ class Piece(SparseGridLayout, TetrisAware):
 
         self.vertical = False
 
+        """
+        One may wonder, when entering the realms of Piece.update(), "what exactly is delayed_update?".
+
+        It is what makes a piece remain controllable after having touched the ground, for a static duration (.5).
+        It has to be de-activated in case of a "false positive", that is, if an update triggers this system but the
+        player then moves the piece over a hole - that would keep the update speed at .5, effectively reducing gravity!
+
+        Therefore in move() and rotate() the boolean is checked - if an update is due then it is applied, then if this
+        update notices the Piece isn't right above the ground anymore, it triggers the "normal" gravity back by calling
+        on_parent.
+        """
+        self.delayed_update = False
+
     def on_parent(self, *args):
         if self.parent:
             level = self.parent.parent.level
@@ -72,6 +85,19 @@ class Piece(SparseGridLayout, TetrisAware):
                 self.parent.remove_widget(self)
         else:
             self.tetris_coords[1] = self.tetris_coords[1] - 1
+
+            if self.tetris_coords[1] == 0 or self.collide_piece('down'):
+                Clock.unschedule(self.update)
+                Clock.schedule_interval(self.update, .5)
+
+                self.delayed_update = True
+
+            elif self.delayed_update:
+                self.delayed_update = False
+
+                Clock.unschedule(self.update)
+                self.on_parent()
+
 
     def remove_children(self):
         for child in self.children[:]:
@@ -166,6 +192,9 @@ class Piece(SparseGridLayout, TetrisAware):
 
             self.update()
 
+        if self.delayed_update and self.tetris_coords[1] > 0 and not self.collide_piece('down'):
+            self.update()
+
     def rotate(self, **kwargs):
         direction = 'ccw'
         if 'direction' in kwargs:
@@ -182,6 +211,9 @@ class Piece(SparseGridLayout, TetrisAware):
         self.map = new_map
 
         self.tetris_coords = new_coords
+
+        if self.delayed_update and self.tetris_coords[1] > 0 and not self.collide_piece('down'):
+            self.update()
 
     def rotate_map(self, direction):
         new_map = zip(*self.map[::-1])
@@ -258,6 +290,10 @@ class ErrorPiece(Piece):
 
         self.highlight = False
 
+    def on_parent(self, *args):
+        if self.parent:
+            Clock.schedule_interval(self.update, .5)
+
     def on_keypress(self, keyboard, keycode, text, modifiers):
         return True
 
@@ -295,6 +331,9 @@ class ErrorPiece(Piece):
 
 class PreviewPiece(Piece):
     def update(self, *args):
+        pass
+
+    def on_parent(self, *args):
         pass
 
     def on_keypress(self, keyboard, key, keycode, modifiers):
