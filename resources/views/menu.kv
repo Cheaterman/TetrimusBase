@@ -5,7 +5,6 @@ MenuScreen:
         Color:
             rgba: 1, 1, 1, 1
         Rectangle:
-            pos: self.pos
             size: self.size
             source: 'resources/images/menu_background.png'
 
@@ -14,8 +13,8 @@ MenuScreen:
         row_default_height: 50
         row_force_default: True
         spacing: 25
-        size_hint: 0.3, None
-        pos: root.center_x + root.width * 0.45 - self.width, root.center_y + self.height / 2
+        size_hint: 0.3, .5
+        pos_hint: {'center_x': .80, 'center_y': .5}
 
         OSButton:
             text: 'Classic mode'

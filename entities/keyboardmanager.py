@@ -15,7 +15,7 @@ class KeyboardManager(EventDispatcher):
 
         self.pressed_keys = []
 
-        self.repeat_delay = .2
+        self.repeat_delay = .1
         self.repeat_speed = .1
 
         self.keypress_breaks_repeat = True

@@ -1,7 +1,25 @@
 ClassicGameScreen:
     name: 'classic'
+
     gamearea: TetrisArea
     spawn: PieceSpawner
+
+    canvas:
+        Color:
+            rgba: .5, .5, .5, .25
+        Rectangle:
+            size: self.size
+
+    BMLabel:
+        size_hint: .2, .1
+        pos_hint: {'center_x': .55, 'center_y': .5}
+
+        font_name: 'resources/font/Tetrimus.fnt'
+        text: 'Score:\n%06d\n\nLevel:\n%d\n\nTetris:\n%d\nTriple:\n%d\nDouble:\n%d\nSingle:\n%d' % (root.score, root.level, root.counter[3], root.counter[2], root.counter[1], root.counter[0])
+
+        text_size: self.width, None
+        font_size: .5
+        color: 1, .5, .5, 1
 
     OSButton:
         text: 'Back to menu'

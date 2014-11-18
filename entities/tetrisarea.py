@@ -2,8 +2,8 @@ __author__ = 'Cheaterman'
 
 from kivy.uix.floatlayout import FloatLayout
 from kivy.animation import Animation
-from kivy.uix.widget import Widget
 from kivy.graphics import Color, Rectangle
+from kivy.graphics.instructions import InstructionGroup
 from kivy.properties import ObjectProperty
 from collections import deque
 from interfaces import GridAware
@@ -18,6 +18,11 @@ class TetrisArea(FloatLayout, GridAware):
     preview2 = ObjectProperty(None)
     preview3 = ObjectProperty(None)
 
+    def __init__(self, **kwargs):
+        super(TetrisArea, self).__init__(**kwargs)
+
+        self.currently_exploding = 0
+
     def check_line(self):
         y = 0
         while y < self.rows:
@@ -31,6 +36,9 @@ class TetrisArea(FloatLayout, GridAware):
                 self.remove_line(y)
             else:
                 y += 1
+
+        if self.currently_exploding:
+            self.parent.counter[self.currently_exploding - 1] += 1
 
     def remove_line(self, line):
         for child in self.children[:]:
@@ -47,32 +55,34 @@ class TetrisArea(FloatLayout, GridAware):
                     ).start(child)
 
     def add_explosion(self, line):
-        for child in self.children:
-            if type(child) == Widget:
-                line += 1
+        line += self.currently_exploding
+        self.currently_exploding += 1
 
-        explosion = Widget()
-        with explosion.canvas:
-            Color(1, 1, .5, .8)
-            Rectangle(
-                pos=self.coord_to_pos(0, line),
-                size=(
-                    self.tile_size()[0] * self.cols,
-                    self.tile_size()[1]
-                )
+        explosion = InstructionGroup()
+        color = Color(1, 1, .5, .8)
+
+        explosion.add(color)
+
+        explosion.add(Rectangle(
+            pos=self.coord_to_pos(0, line),
+            size=(
+                self.tile_size()[0] * self.cols,
+                self.tile_size()[1]
             )
+        ))
 
-        self.add_widget(explosion)
+        self.canvas.add(explosion)
 
-        def remove(self, widget):
-            widget.parent.remove_widget(widget)
+        def remove(self):
+            self.canvas.remove(explosion)
+            self.currently_exploding -= 1
 
         anim = Animation(
-            opacity=0,
+            a=0,
             duration=.125
         )
-        anim.bind(on_complete=remove)
-        anim.start(explosion)
+        anim.bind(on_complete=lambda *args: remove(self))
+        anim.start(color)
 
     def preview_update(self):
         spawner = self.parent.spawn

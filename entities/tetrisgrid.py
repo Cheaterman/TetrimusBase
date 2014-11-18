@@ -8,9 +8,10 @@ from kivy.graphics import Color, Line
 class TetrisGrid(Widget):
     def __init__(self, **kwargs):
         super(TetrisGrid, self).__init__(**kwargs)
-        self.bind(size=self.redraw)
+        self.bind(pos=self.redraw, size=self.redraw)
 
     def redraw(self, *args):
+        self.canvas.clear()
         with self.canvas:
             Color(1, .5, 0)
             Line(

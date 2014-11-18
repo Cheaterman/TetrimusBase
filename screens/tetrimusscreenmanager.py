@@ -10,5 +10,6 @@ from widgets import OSButton
 class TetrimusScreenManager(ScreenManager):
     def __init__(self):
         super(TetrimusScreenManager, self).__init__()
+
         self.add_widget(Builder.load_file('resources/views/menu.kv'))
         self.add_widget(Builder.load_file('resources/views/classicgame.kv'))

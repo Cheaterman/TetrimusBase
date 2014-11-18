@@ -5,12 +5,9 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivy.animation import Animation
 from kivy.clock import Clock
-from kivy.properties import ObjectProperty
-from entities import Block
-from entities import TetrisArea
-from entities import TetrisGrid
-from entities import Piece, PreviewPiece
-from entities import PieceSpawner
+from kivy.properties import ObjectProperty, NumericProperty, ListProperty
+from entities import Block, TetrisArea, TetrisGrid, Piece, PreviewPiece, PieceSpawner
+from widgets import BMLabel
 
 
 
@@ -18,6 +15,11 @@ class ClassicGameScreen(Screen):
     gamearea = ObjectProperty(None)
     block = ObjectProperty(None)
     spawn = ObjectProperty(None)
+
+    counter = ListProperty((0, 0, 0, 0))
+
+    score = NumericProperty(0)
+    level = NumericProperty(0)
 
     def on_enter(self, *args):
         self.spawn.new_piece()
