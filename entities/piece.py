@@ -239,31 +239,27 @@ class Piece(SparseGridLayout, TetrisAware):
 
     def on_keypress(self, keyboard, key, keycode, modifiers):
         self.reset_keyboard_repeat()
-        if keycode == 16: # 'q' on qwerty
+        if key == 113: # 'q' on qwerty
             self.rotate(direction='ccw')
-        elif keycode == 18: # 'e'
+        elif key == 101: # 'e'
             self.rotate(direction='cw')
-        elif keycode == 30: # 'a' on qwerty
+        elif key == 97: # 'a' on qwerty
             self.move('left')
-        elif keycode == 32: # 'd'
+        elif key == 100: # 'd'
             self.move('right')
-        elif keycode == 31: # 's'
+        elif key == 115: # 's'
             self.move('down')
-        elif keycode == 44: # 'z' on qwerty
+        elif key == 122: # 'z' on qwerty
             self.rotate(direction='ccw')
-        elif keycode == 45: # 'x'
+        elif key == 120: # 'x'
             self.rotate(direction='cw')
-        elif keycode == 203 \
-            or keycode == 123: # left arrow, left arrow (OSX)
+        elif key == 276: # left arrow
             self.move('left')
-        elif keycode == 205 \
-            or keycode == 124: # right arrow, right arrow (OSX)
+        elif key == 275: # right arrow
             self.move('right')
-        elif keycode == 200 \
-            or keycode == 126: # up arrow, up arrow (OSX)
+        elif key == 273: # up arrow
             self.rotate(direction='ccw')
-        elif keycode == 208 \
-            or keycode == 125: # down arrow, down arrow (OSX)
+        elif key == 274: # down arrow
             self.move('down')
         else:
             return True
