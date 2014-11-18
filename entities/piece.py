@@ -34,8 +34,13 @@ class Piece(SparseGridLayout, TetrisAware):
 
         self.vertical = False
 
-        Clock.schedule_interval(self.update, .5)
-
+    def on_parent(self, *args):
+        if self.parent:
+            level = self.parent.parent.level
+            Clock.schedule_interval(
+                self.update,
+                .5 * (.75 + (.05 * (4 - (level % 4)))) ** level
+            )
 
     def on_map(self, instance, value):
         current_child = 0

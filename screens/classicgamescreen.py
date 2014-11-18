@@ -48,4 +48,3 @@ class ClassicGameScreen(Screen):
 
     def level_update(self, *args):
         self.level_progress += 1
-        print 'DEBUG: %d' % self.level_progress
