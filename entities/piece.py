@@ -41,11 +41,12 @@ class Piece(SparseGridLayout, TetrisAware):
         It has to be de-activated in case of a "false positive", that is, if an update triggers this system but the
         player then moves the piece over a hole - that would keep the update speed at .5, effectively reducing gravity!
 
-        Therefore in move() and rotate() the boolean is checked - if an update is due then it is applied, then if this
-        update notices the Piece isn't right above the ground anymore, it triggers the "normal" gravity back by calling
-        on_parent.
+        Therefore in move() and rotate() the boolean is checked - if this method notices the Piece isn't right above the
+        ground anymore, it triggers the "normal" gravity back by calling on_parent. delayed_update_disabled is here to
+        prevent this from happening twice.
         """
         self.delayed_update = False
+        self.delayed_update_disabled = False
 
     def on_parent(self, *args):
         if self.parent:
@@ -86,17 +87,27 @@ class Piece(SparseGridLayout, TetrisAware):
         else:
             self.tetris_coords[1] = self.tetris_coords[1] - 1
 
-            if self.tetris_coords[1] == 0 or self.collide_piece('down'):
-                Clock.unschedule(self.update)
-                Clock.schedule_interval(self.update, .5)
+            self.check_lock()
 
-                self.delayed_update = True
+    def check_lock(self):
+        if not self.delayed_update and (self.tetris_coords[1] == 0 or self.collide_piece('down')):
+            self.trigger_lock()
+        elif (self.delayed_update and not self.delayed_update_disabled
+              and (self.tetris_coords[1] > 0 and not self.collide_piece('down'))):
+            self.reset_lock()
 
-            elif self.delayed_update:
-                self.delayed_update = False
+    def trigger_lock(self):
+        Clock.unschedule(self.update)
+        Clock.schedule_interval(self.update, .5)
 
-                Clock.unschedule(self.update)
-                self.on_parent()
+        self.delayed_update = True
+
+    def reset_lock(self):
+        self.delayed_update = False
+        self.delayed_update_disabled = True
+
+        Clock.unschedule(self.update)
+        self.on_parent()
 
 
     def remove_children(self):
@@ -192,8 +203,7 @@ class Piece(SparseGridLayout, TetrisAware):
 
             self.update()
 
-        if self.delayed_update and self.tetris_coords[1] > 0 and not self.collide_piece('down'):
-            self.update()
+        self.check_lock()
 
     def rotate(self, **kwargs):
         direction = 'ccw'
@@ -212,8 +222,7 @@ class Piece(SparseGridLayout, TetrisAware):
 
         self.tetris_coords = new_coords
 
-        if self.delayed_update and self.tetris_coords[1] > 0 and not self.collide_piece('down'):
-            self.update()
+        self.check_lock()
 
     def rotate_map(self, direction):
         new_map = zip(*self.map[::-1])
