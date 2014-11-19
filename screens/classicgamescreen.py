@@ -1,7 +1,7 @@
 __author__ = 'Cheaterman'
 
 from functools import partial
-from kivy.uix.screenmanager import Screen
+from interfaces import BackgroundMusicAware
 from kivy.uix.boxlayout import BoxLayout
 from kivy.animation import Animation
 from kivy.clock import Clock
@@ -11,7 +11,7 @@ from widgets import BMLabel
 
 
 
-class ClassicGameScreen(Screen):
+class ClassicGameScreen(BackgroundMusicAware):
     gamearea = ObjectProperty(None)
     block = ObjectProperty(None)
     spawn = ObjectProperty(None)

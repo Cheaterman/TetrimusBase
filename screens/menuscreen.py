@@ -1,8 +1,7 @@
 __author__ = 'Cheaterman'
 
-from kivy.uix.screenmanager import Screen
+from interfaces import BackgroundMusicAware
 
 
-
-class MenuScreen(Screen):
+class MenuScreen(BackgroundMusicAware):
     pass
