@@ -7,7 +7,7 @@ from kivy.animation import Animation
 from kivy.clock import Clock
 from kivy.properties import ObjectProperty, NumericProperty, ListProperty
 from entities import Block, TetrisArea, TetrisGrid, Piece, PreviewPiece, PieceSpawner
-from widgets import BMLabel
+from widgets import BMLabel, LevelProgressBar
 
 
 
@@ -30,7 +30,8 @@ class ClassicGameScreen(BackgroundMusicAware):
     def on_leave(self, *args):
         for child in self.gamearea.children[:]:
             if not isinstance(child, TetrisGrid)\
-               and not isinstance(child, PreviewPiece):
+               and not isinstance(child, PreviewPiece)\
+               and not isinstance(child, LevelProgressBar):
                 self.gamearea.remove_widget(child)
 
         Clock.unschedule(self.restart)
@@ -48,3 +49,6 @@ class ClassicGameScreen(BackgroundMusicAware):
 
     def level_update(self, *args):
         self.level_progress += 1
+
+        for bar in self.gamearea.progress:
+            bar.progress = self.level_progress / 1000.

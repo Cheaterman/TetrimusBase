@@ -4,7 +4,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.animation import Animation
 from kivy.graphics import Color, Rectangle
 from kivy.graphics.instructions import InstructionGroup
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, ListProperty
 from collections import deque
 from interfaces import GridAware
 from entities import TetrisGrid
@@ -14,6 +14,8 @@ from entities import Block
 
 class TetrisArea(FloatLayout, GridAware):
     grid = ObjectProperty(None)
+    progress = ListProperty([])
+
     preview1 = ObjectProperty(None)
     preview2 = ObjectProperty(None)
     preview3 = ObjectProperty(None)

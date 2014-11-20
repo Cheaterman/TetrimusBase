@@ -35,6 +35,8 @@ ClassicGameScreen:
     TetrisArea:
         id: TetrisArea
         grid: TetrisGrid
+        progress: (LevelProgressBarL, LevelProgressBarR)
+
         preview1: PreviewPiece1
         preview2: PreviewPiece2
         preview3: PreviewPiece3
@@ -48,6 +50,22 @@ ClassicGameScreen:
             pos: self.parent.pos
             size: self.parent.size
             shape: self.parent.shape
+
+        LevelProgressBar:
+            id: LevelProgressBarL
+            y: self.parent.y + 1
+            x: self.parent.x - self.width + .5
+            size_hint: None, None
+            width: 3
+            height: self.parent.height + 2
+
+        LevelProgressBar:
+            id: LevelProgressBarR
+            y: self.parent.y + 1
+            x: self.parent.right - .5
+            size_hint: None, None
+            width: 3
+            height: self.parent.height + 2
 
         PreviewPiece:
             id: PreviewPiece1
