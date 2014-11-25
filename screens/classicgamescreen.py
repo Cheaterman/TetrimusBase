@@ -46,6 +46,7 @@ class ClassicGameScreen(BackgroundMusicAware):
 
     def game_lost(self):
         Clock.schedule_once(self.restart, 10)
+        Clock.unschedule(self.level_update)
 
     def level_update(self, *args):
         self.level_progress += 1

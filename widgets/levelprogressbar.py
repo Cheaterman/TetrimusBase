@@ -45,6 +45,11 @@ class LevelProgressBar(Widget):
         self.bind(pos=self.redraw, size=self.redraw)
 
     def on_progress(self, *args):
+        if self.progress < 0:
+            self.progress = 0
+        if self.progress > 1:
+            self.progress = 1
+
         self.progress_mask.pos  = (self.x, self.y + self.height * self.progress)
         self.progress_mask.size = (self.width, self.height * (1 - self.progress))
 

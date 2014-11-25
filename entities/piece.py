@@ -35,18 +35,15 @@ class Piece(SparseGridLayout, TetrisAware):
         self.vertical = False
 
         """
-        One may wonder, when entering the realms of Piece.update(), "what exactly is delayed_update?".
+        One may wonder, when entering the realms of Piece.update(), "what exactly is delay_lambda?".
 
         It is what makes a piece remain controllable after having touched the ground, for a static duration (.5).
-        It has to be de-activated in case of a "false positive", that is, if an update triggers this system but the
-        player then moves the piece over a hole - that would keep the update speed at .5, effectively reducing gravity!
 
-        Therefore in move() and rotate() the boolean is checked - if this method notices the Piece isn't right above the
-        ground anymore, it triggers the "normal" gravity back by calling on_parent. delayed_update_disabled is here to
-        prevent this from happening twice.
+        It is checked in move() and rotate() - if check_lock notices the Piece isn't right above the ground anymore, it
+        triggers "normal" gravity back by calling on_parent. Finally, the lock timeout is necessarily called after the
+        static duration (.5), to lock the piece if its height hasn't changed (we discard the false-positive if it has).
         """
-        self.delayed_update = False
-        self.delayed_update_disabled = False
+        self.delay_lambda = None
 
     def on_parent(self, *args):
         if self.parent:
@@ -85,30 +82,39 @@ class Piece(SparseGridLayout, TetrisAware):
             if self.parent:
                 self.parent.remove_widget(self)
         else:
-            self.tetris_coords[1] = self.tetris_coords[1] - 1
+            self.tetris_coords[1] -= 1
 
-            self.check_lock()
+            self.check_lock(retrigger=True)
 
-    def check_lock(self):
-        if not self.delayed_update and (self.tetris_coords[1] == 0 or self.collide_piece('down')):
+    def check_lock(self, retrigger=False):
+        if not self.delay_lambda and (self.tetris_coords[1] == 0 or self.collide_piece('down')):
             self.trigger_lock()
-        elif (self.delayed_update and not self.delayed_update_disabled
-              and (self.tetris_coords[1] > 0 and not self.collide_piece('down'))):
+        elif self.delay_lambda and (self.tetris_coords[1] > 0 and not self.collide_piece('down')):
             self.reset_lock()
+        elif retrigger and self.delay_lambda:
+            Clock.unschedule(self.delay_lambda)
+            self.trigger_lock()
+
 
     def trigger_lock(self):
         Clock.unschedule(self.update)
-        Clock.schedule_interval(self.update, .5)
+        y = self.tetris_coords[1]
 
-        self.delayed_update = True
+        self.delay_lambda = lambda *args: self.lock_timeout(y)
+        Clock.schedule_once(self.delay_lambda, .5)
 
     def reset_lock(self):
-        self.delayed_update = False
-        self.delayed_update_disabled = True
-
-        Clock.unschedule(self.update)
         self.on_parent()
 
+        Clock.unschedule(self.delay_lambda)
+        self.delay_lambda = None
+
+    def lock_timeout(self, y):
+        if self.tetris_coords[1] == y:
+            self.update()
+            self.on_parent()
+
+        self.delay_lambda = None
 
     def remove_children(self):
         for child in self.children[:]:
